@@ -5,16 +5,14 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 	InputParser inputParser(argv);
-	inputParser.parse();
+	try {
+		inputParser.parse();
+	} catch (runtime_error err) {
+		cerr << err.what() << endl;
+		//exit(0);
+	}
 
-	WordGraph graph;
-	graph.createArc("abc");
-	graph.createArc("cba");
-	graph.createArc("abc");
-	graph.createArc("aaa");
-	graph.getVertex('a').adjArcs()[1].setStar();
-	
-	graph.print(cout);
+
 
 	getchar();
 	return 0;

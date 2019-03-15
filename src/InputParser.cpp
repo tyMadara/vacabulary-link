@@ -3,14 +3,13 @@
 using namespace std;
 
 InputParser::InputParser(char *args[]) {
-	char **p = args;
+	char **p = args + 1;
 	while (*p) {
 		this->args.push_back(*p);
 		++p;
 	}
 	this->args.push_back("");
 }
-
 
 void InputParser::parse() {
 	for (auto it = args.cbegin(); it != args.cend(); ++it) {
@@ -25,14 +24,16 @@ void InputParser::parse() {
 		} else if (*it == "-h") {
 			++it;
 			checkcharacter(*it);
-			firstchar = (*it)[0];
+			firstchar = tolower((*it)[0]);
 		} else if (*it == "-t") {
 			++it;
 			checkcharacter(*it);
-			lastchar = (*it)[0];
+			lastchar = tolower((*it)[0]);
 		} else if (*it == "-n") {
-			wordnum = atoi((++it)->c_str());
+			int wordnum = atoi((++it)->c_str());
+			checknumber(wordnum);
 		} else {
+			checkarg(*it);
 		}
 	}
 }

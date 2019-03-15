@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <cctype>
+#include <exception>
 
 class InputParser {
 private:
@@ -18,28 +19,31 @@ private:
 
 	void checkfilename() {
 		if (filename.size()) {
-			std::cerr << "error: too much output file" << std::endl;
-			std::exit(-1);
+			throw std::runtime_error("too much output file");
 		}
 	}
 
 	void checkcharacter(const std::string &s) {
 		if (s.size() != 1 || !isalpha(s[0])) {
-			std::cerr << "error: character format error" << std::endl;
-			std::exit(-1);
+			throw std::runtime_error("'" + s + "' not a valid character");
 		}
 	}
 
 	void checknumber(int num) {
-		if (num < 0) {
-			std::cerr << "error: word number should be positive" << std::endl;
-			std::exit(-1);
+		if (num <= 0) {
+			throw std::runtime_error("word number should be a positive integer");
 		}
 	}
+
+	void checkarg(const std::string &s) {
+		if (s.size()) {
+			throw std::runtime_error("unknown arg '" + s + "'");
+		}
+	}
+
 public:
 	InputParser(char *args[]);
 	void parse();
-
 };
 
 #endif
