@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
 	}
 #ifndef NDEBUG
 	cout << endl << "------args information-------" << endl;
-	inputParser.print(cout) << endl << "-----------------------------" << endl;
+	inputParser.print(cout) << endl;
 #endif
 
 	// read file
@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
 	for (const auto &s : words) graph.createArc(s);
 #ifndef NDEBUG
 	cout << endl << "------graph information------" << endl;
-	graph.print(cout) << endl << "-----------------------------" << endl;
+	graph.print(cout) << endl;
 #endif
 
 	// calculate

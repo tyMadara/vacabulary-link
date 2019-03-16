@@ -1,5 +1,5 @@
 CXX=g++
-
+CFLAGS=-D _GLIBCXX_DEBUG
 Wordlist: InputParser.o readFile.o WordGraph.o Wordlist.o
 	$(CXX) $^ -o $@
 	

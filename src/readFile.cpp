@@ -3,11 +3,10 @@
 void readFile(std::vector <std::string> &words, const std::string &path) {
 	std::ifstream in(path.c_str());
 	if (!in.is_open()) throw std::runtime_error("Open " + path + " failed");
-	char c;
+	int c;
 	bool flag = true;
 	std::string buffer;
 	while ((c = in.get()) != EOF) {
-		std::cout << c;
 		if (isalpha(c)) {
 			buffer += tolower(c);
 			flag = true;
