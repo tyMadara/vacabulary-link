@@ -24,12 +24,18 @@
     <ClCompile Include="WordGraph.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="readFile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputParser.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="WordGraph.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="readFile.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

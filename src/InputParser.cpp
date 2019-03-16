@@ -30,10 +30,11 @@ void InputParser::parse() {
 			checkcharacter(*it);
 			lastchar = tolower((*it)[0]);
 		} else if (*it == "-n") {
-			int wordnum = atoi((++it)->c_str());
+			wordnum = atoi((++it)->c_str());
 			checknumber(wordnum);
 		} else {
 			checkarg(*it);
 		}
 	}
+	checknull();
 }

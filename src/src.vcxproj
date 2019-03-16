@@ -77,6 +77,9 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -116,11 +119,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="InputParser.cpp" />
+    <ClCompile Include="readFile.cpp" />
     <ClCompile Include="WordGraph.cpp" />
     <ClCompile Include="Wordlist.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputParser.h" />
+    <ClInclude Include="readFile.h" />
     <ClInclude Include="WordGraph.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
