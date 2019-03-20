@@ -16,4 +16,5 @@ void readFile(std::vector <std::string> &words, const std::string &path) {
 			flag = false;
 		}
 	}
+	if (words.size() == 0) throw std::runtime_error("No words!");
 }
