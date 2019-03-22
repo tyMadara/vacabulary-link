@@ -122,11 +122,13 @@
     <ClCompile Include="readFile.cpp" />
     <ClCompile Include="WordGraph.cpp" />
     <ClCompile Include="Wordlist.cpp" />
+    <ClCompile Include="WordMost.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputParser.h" />
     <ClInclude Include="readFile.h" />
     <ClInclude Include="WordGraph.h" />
+    <ClInclude Include="WordMost.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

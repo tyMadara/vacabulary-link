@@ -5,7 +5,6 @@
 #include"WordGraph.h"
 
 class ArcNode;
-class WordMost;
 
 class ArcNode
 {
@@ -17,7 +16,7 @@ public:
 class WordMost
 {
     public:
-        WordMost(WordGraph g){graph = g;}
+        WordMost(WordGraph &g):graph(g) {}
         virtual ~WordMost();
         void linkSearch();
         void setMaxLength(int len){maxlength = len;}
@@ -28,7 +27,7 @@ class WordMost
     protected:
 
     private:
-        WordGraph graph;
+		WordGraph &graph;
         int maxlength = 0;
 
 };

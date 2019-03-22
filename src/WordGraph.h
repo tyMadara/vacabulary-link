@@ -57,6 +57,8 @@ public:
 		getVertex(b).adjarcs.push_back(Arc(s, getVertex(e)));
 	}
 	void clearAllStar() const;
+	std::vector<Vertex> getV() { return v; }
+
 
 #ifndef NDEBUG
 	std::ostream &print(std::ostream &os) const {

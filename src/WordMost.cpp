@@ -14,7 +14,7 @@ void DSearch(vector<ArcNode> &qlist, int depth, Vertex &vex, ArcNode &node, Word
     {
         if(vex.adjArcs()[i].isStar() == false)
         {
-            cout << vex.adjArcs()[i].getName() << endl;
+            /*cout << vex.adjArcs()[i].getName() << endl;*/
             flag = 1;
             vex.adjArcs()[i].setStar();
             node.depth = depth;
@@ -23,18 +23,18 @@ void DSearch(vector<ArcNode> &qlist, int depth, Vertex &vex, ArcNode &node, Word
             DSearch(qlist, depth+1, vex.adjArcs()[i].adjVex() , node, wm);
             vex.adjArcs()[i].clearStar();
             qlist.pop_back();
-            for(int i=0; i<qlist.size() ; i++)
+            /*for(int i=0; i<qlist.size() ; i++)
                 cout << qlist[i].value << " ";
-            cout << endl;
+            cout << endl;*/
         }
     }
     if(flag == 0)
     {
+		/*for (int i = 0; i < depth - 1; i++)
+			cout << qlist[i].value << " ";
+		cout << endl;*/
         if(depth-1 > wm->getMaxlength())
         {
-            for(int i=0; i<depth-1; i++)
-                cout << qlist[i].value << " ";
-            cout << endl;
             wm->setMaxLength(depth-1);
             wm->setQlist(qlist);
         }
@@ -45,7 +45,7 @@ void WordMost::linkSearch()
 {
     vector<ArcNode> qlist;
     ArcNode node;
-    vector<Vertex> v = graph.getV();
+    vector<Vertex> &v = graph.v;
     for(int i=0; i<26; i++)
     {
         DSearch(qlist, 1, v[i], node, this);
