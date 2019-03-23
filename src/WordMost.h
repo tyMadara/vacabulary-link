@@ -18,15 +18,33 @@ public:
 class WordMost
 {
     public:
-        WordMost(WordGraph &g):graph(g) {}
+		WordMost(WordGraph &g) :graph(g) { graph.setRevArc();  }
         virtual ~WordMost();
         void wordMostSearch();
         void letterMostSearch();
-        void setMaxLength(int len){maxlength = len;}
+		void setMaxLength(int len) { maxlength = len; }
         int getMaxlength() {return maxlength;}
         void setQlist(std::vector<ArcNode> &qlist) {maxQlist.clear(); maxQlist.assign(qlist.begin(), qlist.end());}
 		void wordMostLargeScaleSearch();
+		void letterMostLargeScaleSearch();
+		void certainHeadSearch(char h);
+		void certainHeadSearchLargeScale(char h);
+		void letterMostCertainHeadSearch(char a);
+		void letterMostCertainHeadSearchLargeScale(char a);
 		void setTimeLimit(time_t time) { timelimit = time; }
+		void certainTailSearch(char tail);
+		void certainTailSearchLargeScale(char tail);
+		void letterMostCertainTailSearch(char tail);
+		void letterMostCertainTailSearchLargeScale(char tail);
+		void printQlist(); 
+		void revQlist()
+		{
+			for (int i = 0; i < maxQlist.size() / 2; i++)
+			{
+				std::swap(maxQlist[i], maxQlist[maxQlist.size() - 1 - i]);
+			}
+		}
+		WordGraph &getGraph() { return graph; }
         std::vector<ArcNode> maxQlist;
 
     protected:
