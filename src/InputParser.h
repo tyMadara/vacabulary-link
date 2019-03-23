@@ -7,6 +7,7 @@
 #include <iostream>
 #include <cctype>
 #include <exception>
+#include "DebugInfo.h"
 
 class InputParser {
 private:
