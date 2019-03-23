@@ -76,6 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,6 +119,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="findAllWordList.cpp" />
     <ClCompile Include="InputParser.cpp" />
     <ClCompile Include="readFile.cpp" />
     <ClCompile Include="WordGraph.cpp" />
@@ -125,6 +127,7 @@
     <ClCompile Include="WordMost.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="findAllWordList.h" />
     <ClInclude Include="InputParser.h" />
     <ClInclude Include="readFile.h" />
     <ClInclude Include="WordGraph.h" />
