@@ -1,6 +1,7 @@
 #include "readFile.h"
 #include <iostream>
 void readFile(std::vector <std::string> &words, const std::string &path) {
+	bool rst = false;
 	std::ifstream in(path.c_str());
 	if (!in.is_open()) throw std::runtime_error("Open " + path + " failed");
 	int c;
@@ -10,7 +11,9 @@ void readFile(std::vector <std::string> &words, const std::string &path) {
 		if (isalpha(c)) {
 			buffer += tolower(c);
 			flag = true;
+			rst = true;
 		} else if (flag) {
+			if (!rst) continue;
 			words.push_back(buffer);
 			buffer = "";
 			flag = false;
