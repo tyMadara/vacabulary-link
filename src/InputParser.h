@@ -57,7 +57,7 @@ public:
 	int getWordNum() { return wordnum; }		// -1 by default
 
 #ifndef NDEBUG
-	std::ostream &print(std::ostream &os) {
+	std::ostream &print(std::ostream &os = std::cout) {
 		os << "input file: " << filename << std::endl
 			<< "maximum: " << (charmost ? "character" : "word") << std::endl
 			<< "first character: " << firstchar << std::endl

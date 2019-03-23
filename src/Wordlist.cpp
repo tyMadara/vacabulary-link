@@ -1,8 +1,7 @@
-//#define NDEBUG
-
 #include "InputParser.h"
 #include "WordGraph.h"
 #include "readFile.h"
+#include "findAllWordList.h"
 
 using namespace std;
 
@@ -35,13 +34,25 @@ int main(int argc, char *argv[]) {
 	// create graph
 	WordGraph graph;
 	for (const auto &s : words) graph.createArc(s);
+	graph.setRevArc();
 #ifndef NDEBUG
 	cout << endl << "------graph information------" << endl;
 	graph.print(cout) << endl;
+	cout << endl << "--reverse graph information--" << endl;
+	graph.printrev(cout) << endl;
 #endif
 
 	// calculate
-	
+	if (inputParser.getWordNum() != -1) {
+		findAllWordList(
+			graph, 
+			inputParser.getWordNum(), 
+			inputParser.getFirstChar(), 
+			inputParser.getLastChar()
+		);
+	} else {
+		// no word number limit
+	}
 
 	return 0;
 }

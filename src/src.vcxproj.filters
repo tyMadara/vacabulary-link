@@ -30,6 +30,9 @@
     <ClCompile Include="WordMost.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="findAllWordList.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputParser.h">
@@ -42,6 +45,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="WordMost.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="findAllWordList.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
