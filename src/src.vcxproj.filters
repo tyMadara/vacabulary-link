@@ -39,6 +39,9 @@
     <ClCompile Include="getresult.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="findAllCharList.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputParser.h">
@@ -63,6 +66,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="getresult.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="findAllCharList.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
