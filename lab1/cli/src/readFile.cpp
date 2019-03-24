@@ -1,5 +1,7 @@
 #include "readFile.h"
 #include <iostream>
+#include <algorithm>
+
 void readFile(std::vector <std::string> &words, const std::string &path) {
 	bool rst = false;
 	std::ifstream in(path.c_str());
@@ -14,10 +16,16 @@ void readFile(std::vector <std::string> &words, const std::string &path) {
 			rst = true;
 		} else if (flag) {
 			if (!rst) continue;
-			words.push_back(buffer);
+			//if(find(words.begin(), words.end(), buffer))
+				words.push_back(buffer);
 			buffer = "";
 			flag = false;
 		}
 	}
 	if (words.size() == 0) throw std::runtime_error("No words!");
+	//ШЅжи
+	std::vector <std::string>::iterator iter = unique(words.begin(), words.end());
+	words.erase(iter, words.end());
 }
+
+
