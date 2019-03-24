@@ -21,7 +21,7 @@ void WordMost::exec()
 	{
 		if (h != '\0')
 		{
-			ofstream ofh("solution.txt", ios::app);
+			ofstream ofh("solution.txt");
 			if (wordnum <= 50)
 				certainHeadSearch(h);
 			else
@@ -32,6 +32,7 @@ void WordMost::exec()
 			for (int i = 0; i < maxQlist.size(); i++)
 				ofh << maxQlist[i].value << " ";
 			ofh << endl;
+			ofh.close();
 			return;
 		}
 		if (t != '\0')
@@ -40,12 +41,13 @@ void WordMost::exec()
 				certainTailSearch(t);
 			else
 				certainTailSearchLargeScale(t);
-			ofstream ofh("solution.txt", ios::app);
+			ofstream ofh("solution.txt");
 			ofh << "word most search: " << "tail = " << t << " (" << wordnum << ")" << endl;
 			ofh << "word most list length = " << getMaxlength() << endl;
 			for (int i = 0; i < maxQlist.size(); i++)
 				ofh << maxQlist[i].value << " ";
 			ofh << endl;
+			ofh.close();
 			return;
 		}
 		if (h == '\0' && t == '\0')
@@ -54,12 +56,13 @@ void WordMost::exec()
 				wordMostSearch();
 			else
 				wordMostLargeScaleSearch();
-			ofstream ofh("solution.txt", ios::app);
+			ofstream ofh("solution.txt");
 			ofh << "word most search: " << "(" << wordnum << ")" << endl;
 			ofh << "word most list length = " << getMaxlength() << endl;
 			for (int i = 0; i < maxQlist.size(); i++)
 				ofh << maxQlist[i].value << " ";
 			ofh << endl;
+			ofh.close();
 			return;
 		}
 	}
@@ -71,12 +74,13 @@ void WordMost::exec()
 				letterMostCertainHeadSearch(h);
 			else
 				letterMostCertainHeadSearchLargeScale(h);
-			ofstream ofh("solution.txt", ios::app);
+			ofstream ofh("solution.txt");
 			ofh << "letter most search: " << "head = " << h << " (" << wordnum << ")" << endl;
 			ofh << "letter most list length = " << getMaxlength() << endl;
 			for (int i = 0; i < maxQlist.size(); i++)
 				ofh << maxQlist[i].value << " ";
 			ofh << endl;
+			ofh.close();
 			return;
 		}
 		if (t != '\0')
@@ -85,12 +89,13 @@ void WordMost::exec()
 				letterMostCertainTailSearch(t);
 			else
 				letterMostCertainTailSearchLargeScale(t);
-			ofstream ofh("solution.txt", ios::app);
+			ofstream ofh("solution.txt");
 			ofh << "letter most search: " << "tail = " << t << " (" << wordnum << ")" << endl;
 			ofh << "letter most list length = " << getMaxlength() << endl;
 			for (int i = 0; i < maxQlist.size(); i++)
 				ofh << maxQlist[i].value << " ";
 			ofh << endl;
+			ofh.close();
 			return;
 		}
 		if (h == '\0'&&t == '\0')
@@ -99,12 +104,13 @@ void WordMost::exec()
 				letterMostSearch();
 			else
 				letterMostLargeScaleSearch();
-			ofstream ofh("solution.txt", ios::app);
+			ofstream ofh("solution.txt");
 			ofh << "letter most search: " << " (" << wordnum << ")" << endl;
 			ofh << "letter most list length = " << getMaxlength() << endl;
 			for (int i = 0; i < maxQlist.size(); i++)
 				ofh << maxQlist[i].value << " ";
 			ofh << endl;
+			ofh.close();
 			return;
 		}
 	}

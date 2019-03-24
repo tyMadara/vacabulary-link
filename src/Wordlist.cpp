@@ -70,7 +70,13 @@ int main(int argc, char *argv[]) {
 		);
 		mostSearch.setTimeLimit(2000);
 		mostSearch.exec();
-		mostSearch.printQlist();
+		char *ret = (char *)malloc(1000 * sizeof(char));
+		ret[0] = '\0';
+		for (int i = 0; i < mostSearch.maxQlist.size(); i++)
+		{
+			strcat(ret, mostSearch.maxQlist[i].value.c_str());
+			strcat(ret, "\n");
+		}
 	}
 	t.printTime("\nCalculate Total");
 	return 0;
