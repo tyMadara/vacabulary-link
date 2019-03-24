@@ -5,44 +5,40 @@ using namespace std;
 #define OUTPUT_FILE "solution.txt"
 static vector<const string *>::size_type depthLimit;
 static vector<const string *> wordlist;
-static FILE *fp;
+static char *buf;
+static ptrdiff_t off = 0;
 static int num = 0;
 static char endc;
 
 static DebugTime t_writefile;
 
 static inline void openFile() {
-	if ((fp = fopen(OUTPUT_FILE, "w")) == NULL) {
-		cerr << "error: cannot open file 'solution.txt'" << endl;
-		exit(0);
-	}
-	fprintf(fp, "           \n");
+	off += sprintf(buf + off, "           \n");
 }
 
 static inline void closeFile() {
-	rewind(fp);
-	fprintf(fp, "%d", num);
-	fclose(fp);
+	off = sprintf(buf, "%d", num);
+	buf[off] = ' ';
 }
 
 static inline void writeListToFile(const char *s) {	// s is the last string 
 	t_writefile.continueAfterPause();
 	++num;
 	for (const auto *s : wordlist) {
-		fprintf(fp, "%s\n", s->c_str());
+		off += sprintf(buf + off, "%s\n", s->c_str());
 	}
-	fprintf(fp, "%s\n\n", s);
+	off += sprintf(buf + off, "%s\n\n", s);
 	t_writefile.pause();
 }
 
 static inline void revWriteListToFile(const char *s) {	// s is the first string 
 	t_writefile.continueAfterPause();
 	++num;
-	fprintf(fp, "%s\n", s);
+	off += sprintf(buf + off, "%s\n", s);
 	for (auto it = wordlist.cend(); it != wordlist.cbegin(); --it) {
-		fprintf(fp, "%s\n", (*(it - 1))->c_str());
+		off += sprintf(buf + off, "%s\n", (*(it - 1))->c_str());
 	}
-	fprintf(fp, "\n");
+	off += sprintf(buf + off, "\n");
 	t_writefile.pause();
 }
 
@@ -106,9 +102,10 @@ static void revDLS(const Vertex &v) {
 	}
 }
 
-void findAllWordList(const WordGraph &graph, int wordnum, char b, char e) {
+void findAllWordList(char *ret, const WordGraph &graph, int wordnum, char b, char e) {
 
 	DebugTime t;
+	buf = ret;
 	openFile();
 	depthLimit = wordnum - 1;
 	t.printTimeAndRestart("\tOpen File And Preprocessing");

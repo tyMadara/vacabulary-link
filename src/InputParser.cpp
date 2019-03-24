@@ -2,8 +2,8 @@
 
 using namespace std;
 
-InputParser::InputParser(char *args[]) {
-	char **p = args + 1;
+InputParser::InputParser(const char *args[]) {
+	const char **p = args + 1;
 	while (*p) {
 		this->args.push_back(*p);
 		++p;

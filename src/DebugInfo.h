@@ -6,7 +6,7 @@
 #endif
 
 #ifndef NDEBUGTIME
-//#define NDEBUGTIME
+#define NDEBUGTIME
 #endif
 
 #endif

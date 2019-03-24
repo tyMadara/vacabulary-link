@@ -7,34 +7,17 @@
 
 using namespace std;
 
-#define USAGE " {-w|-c} <input_file> [-h <first_character>] [-t <last_character>] [-n <word_num>]"
-
-int main(int argc, char *argv[]) {
+int doCalc(char *ret, std::vector <std::string> &words, const char *argv[]) {
 	DebugTime t;
 
 	// parse input
 	InputParser inputParser(argv);
-	try {
-		inputParser.parse();
-	} catch (runtime_error err) {
-		cerr << err.what() << endl << "Usage: " << argv[0] << USAGE << endl;
-		return -1;
-	}
+	inputParser.parse();
 	t.printTimeAndRestart("Parse Input");
 #ifndef NDEBUG
 	cout << endl << "------args information-------" << endl;
 	inputParser.print(cout) << endl;
 #endif
-
-	// read file
-	vector<string> words;
-	try {
-		readFile(words, inputParser.getInputFileName());
-	} catch (runtime_error err) {
-		cerr << err.what() << endl;
-		return -1;
-	}
-	t.printTimeAndRestart("Read File");
 
 	// create graph
 	WordGraph graph;
@@ -54,6 +37,7 @@ int main(int argc, char *argv[]) {
 		cout << endl << "Detail Time For Calculate: " << endl;
 #endif
 		findAllWordList(
+			ret, 
 			graph, 
 			inputParser.getWordNum(), 
 			inputParser.getFirstChar(), 
