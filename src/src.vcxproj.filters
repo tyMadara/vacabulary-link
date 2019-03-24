@@ -33,6 +33,12 @@
     <ClCompile Include="findAllWordList.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="DebugTime.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="findAllCharList.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputParser.h">
@@ -48,6 +54,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="findAllWordList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugTime.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="findAllCharList.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
