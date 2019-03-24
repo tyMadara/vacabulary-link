@@ -23,6 +23,7 @@ void readFile(std::vector <std::string> &words, const std::string &path) {
 			flag = false;
 		}
 	}
+	if(buffer != "") words.push_back(buffer);
 	if (words.size() == 0) throw std::runtime_error("No words!");
 	//ШЅжи
 	std::vector <std::string>::iterator iter = unique(words.begin(), words.end());
