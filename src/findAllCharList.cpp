@@ -74,7 +74,7 @@ static void DLSWithEnd(const Vertex &v) {
 			if (sz < depthLimit) {
 				arc.setStar();
 				wordlist.push_back(&arc.getName());
-				DLS(arc.adjVex());
+				DLSWithEnd(arc.adjVex());
 				wordlist.pop_back();
 				arc.clearStar();
 			} else if (sz == depthLimit && arc.adjVexName() == endc) {
@@ -91,11 +91,11 @@ static void revDLS(const Vertex &v) {
 			if (sz < depthLimit) {
 				arc->setStar();
 				wordlist.push_back(&arc->getName());
-				DLS(arc->revAdjVex());
+				revDLS(arc->revAdjVex());
 				wordlist.pop_back();
 				arc->clearStar();
 			} else if (sz == depthLimit) {
-				writeListToFile(arc->getName().c_str());
+				revWriteListToFile(arc->getName().c_str());
 			}
 		}
 	}
