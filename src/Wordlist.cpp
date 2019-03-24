@@ -5,6 +5,7 @@
 #include "findAllWordList.h"
 #include "findAllCharList.h"
 #include "DebugTime.h"
+#include "WordMost.h"
 
 using namespace std;
 
@@ -55,6 +56,19 @@ int doCalc(char *ret, std::vector <std::string> &words, const char *argv[]) {	//
 		);
 	} else {
 		// no word number limit
+		WordMost mostSearch(
+			graph, 
+			inputParser.maximumChar(),
+			inputParser.getFirstChar(), 
+			inputParser.getLastChar()
+		);
+		mostSearch.setTimeLimit(2000);
+		mostSearch.exec();
+		for (int i = 0; i < mostSearch.maxQlist.size(); i++)
+		{
+			strcat(ret, mostSearch.maxQlist[i].value.c_str());
+			strcat(ret, "\n");
+		}
 	}
 	t.printTime("\nCalculate Total");
 	return 0;
