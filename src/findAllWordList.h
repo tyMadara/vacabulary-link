@@ -5,6 +5,6 @@
 #include "WordGraph.h"
 #include "DebugTime.h"
 
-void findAllWordList(const WordGraph &, int, char, char);
+void findAllWordList(char *ret, const WordGraph &, int, char, char);
 
 #endif // FIND_ALL_WORD_LIST_H

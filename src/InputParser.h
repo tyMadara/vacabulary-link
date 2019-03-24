@@ -20,36 +20,36 @@ private:
 
 	void checkfilename() {
 		if (filename.size()) {
-			throw std::runtime_error("too much input file");
+			throw std::runtime_error("1");	// too much input file
 		}
 	}
 
 	void checkcharacter(const std::string &s) {
 		if (s.size() != 1 || !isalpha(s[0])) {
-			throw std::runtime_error("'" + s + "' not a valid character");
+			throw std::runtime_error("2");	// not a valid character
 		}
 	}
 
 	void checknumber(int num) {
 		if (num <= 0) {
-			throw std::runtime_error("word number should be a positive integer");
+			throw std::runtime_error("3");	// word number should be a positive integer
 		}
 	}
 
 	void checkarg(const std::string &s) {
 		if (s.size()) {
-			throw std::runtime_error("unknown arg '" + s + "'");
+			throw std::runtime_error("?");
 		}
 	}
 
 	void checknull() {
 		if (!filename.size()) {
-			throw std::runtime_error("no input file");
+			throw std::runtime_error("4");	// no input file
 		}
 	}
 
 public:
-	InputParser(char *args[]);
+	InputParser(const char *args[]);
 	void parse();
 	const std::string &getInputFileName() { return filename; }
 	bool maximumChar() { return charmost; }
