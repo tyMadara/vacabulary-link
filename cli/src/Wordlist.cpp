@@ -6,7 +6,7 @@
 #include "findAllCharList.h"
 #include "DebugTime.h"
 #include "WordMost.h"
-#include <string.h>
+#include <cstring>
 
 using namespace std;
 
