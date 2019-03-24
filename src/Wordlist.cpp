@@ -54,7 +54,11 @@ int doCalc(char *ret, std::vector <std::string> &words, const char *argv[]) {
 		);
 		mostSearch.setTimeLimit(2000);
 		mostSearch.exec();
-		mostSearch.printQlist();
+		for (int i = 0; i < mostSearch.maxQlist.size(); i++)
+		{
+			strcat(ret, mostSearch.maxQlist[i].value.c_str());
+			strcat(ret, "\n");
+		}
 	}
 	t.printTime("\nCalculate Total");
 	return 0;
