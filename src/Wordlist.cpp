@@ -4,6 +4,7 @@
 #include "readFile.h"
 #include "findAllWordList.h"
 #include "DebugTime.h"
+#include "WordMost.h"
 
 using namespace std;
 
@@ -61,6 +62,15 @@ int main(int argc, char *argv[]) {
 		);
 	} else {
 		// no word number limit
+		WordMost mostSearch(
+			graph, 
+			inputParser.maximumChar(),
+			inputParser.getFirstChar(), 
+			inputParser.getLastChar()
+		);
+		mostSearch.setTimeLimit(2000);
+		mostSearch.exec();
+		mostSearch.printQlist();
 	}
 	t.printTime("\nCalculate Total");
 	return 0;

@@ -2,6 +2,114 @@
 
 using namespace std;
 
+WordMost::WordMost(WordGraph &g, bool charmost, char head, char tail) :graph(g)
+{
+	ischarmost = charmost;
+	h = head;
+	t = tail;
+}
+
+void WordMost::exec()
+{
+	cout << ischarmost << endl;
+	int wordnum = 0;
+	for (int i = 0; i < 26; i++)
+	{
+		wordnum += (int)graph.v[i].adjArcs().size();
+	}
+	if (ischarmost == false)
+	{
+		if (h != '\0')
+		{
+			ofstream ofh("solution.txt", ios::app);
+			if (wordnum <= 50)
+				certainHeadSearch(h);
+			else
+				certainHeadSearchLargeScale(h);
+			
+			ofh << "word most search: " << "head = " << h << " (" << wordnum << ")" << endl;
+			ofh << "word most list length = " << getMaxlength() << endl;
+			for (int i = 0; i < maxQlist.size(); i++)
+				ofh << maxQlist[i].value << " ";
+			ofh << endl;
+			return;
+		}
+		if (t != '\0')
+		{
+			if (wordnum <= 50)
+				certainTailSearch(t);
+			else
+				certainTailSearchLargeScale(t);
+			ofstream ofh("solution.txt", ios::app);
+			ofh << "word most search: " << "tail = " << t << " (" << wordnum << ")" << endl;
+			ofh << "word most list length = " << getMaxlength() << endl;
+			for (int i = 0; i < maxQlist.size(); i++)
+				ofh << maxQlist[i].value << " ";
+			ofh << endl;
+			return;
+		}
+		if (h == '\0' && t == '\0')
+		{
+			if (wordnum <= 50)
+				wordMostSearch();
+			else
+				wordMostLargeScaleSearch();
+			ofstream ofh("solution.txt", ios::app);
+			ofh << "word most search: " << "(" << wordnum << ")" << endl;
+			ofh << "word most list length = " << getMaxlength() << endl;
+			for (int i = 0; i < maxQlist.size(); i++)
+				ofh << maxQlist[i].value << " ";
+			ofh << endl;
+			return;
+		}
+	}
+	else
+	{
+		if (h != '\0')
+		{
+			if (wordnum <= 50)
+				letterMostCertainHeadSearch(h);
+			else
+				letterMostCertainHeadSearchLargeScale(h);
+			ofstream ofh("solution.txt", ios::app);
+			ofh << "letter most search: " << "head = " << h << " (" << wordnum << ")" << endl;
+			ofh << "letter most list length = " << getMaxlength() << endl;
+			for (int i = 0; i < maxQlist.size(); i++)
+				ofh << maxQlist[i].value << " ";
+			ofh << endl;
+			return;
+		}
+		if (t != '\0')
+		{
+			if (wordnum <= 50)
+				letterMostCertainTailSearch(t);
+			else
+				letterMostCertainTailSearchLargeScale(t);
+			ofstream ofh("solution.txt", ios::app);
+			ofh << "letter most search: " << "tail = " << t << " (" << wordnum << ")" << endl;
+			ofh << "letter most list length = " << getMaxlength() << endl;
+			for (int i = 0; i < maxQlist.size(); i++)
+				ofh << maxQlist[i].value << " ";
+			ofh << endl;
+			return;
+		}
+		if (h == '\0'&&t == '\0')
+		{
+			if (wordnum <= 50)
+				letterMostSearch();
+			else
+				letterMostLargeScaleSearch();
+			ofstream ofh("solution.txt", ios::app);
+			ofh << "letter most search: " << " (" << wordnum << ")" << endl;
+			ofh << "letter most list length = " << getMaxlength() << endl;
+			for (int i = 0; i < maxQlist.size(); i++)
+				ofh << maxQlist[i].value << " ";
+			ofh << endl;
+			return;
+		}
+	}
+}
+
 WordMost::~WordMost()
 {
     //dtor
@@ -119,7 +227,7 @@ void revDSearch2(vector<ArcNode> &qlist, int depth, Vertex &vex, ArcNode &node, 
 
 void WordMost::certainHeadSearch(char a)
 {
-	setMaxLength(0);
+	setMaxLength(-1);
 	graph.clearAllStar();
 	vector<ArcNode> qlist;
 	ArcNode node;
@@ -130,7 +238,7 @@ void WordMost::certainHeadSearch(char a)
 
 void WordMost::wordMostSearch()
 {
-    setMaxLength(0);
+    setMaxLength(-1);
     graph.clearAllStar();
     vector<ArcNode> qlist;
     ArcNode node;
@@ -144,7 +252,7 @@ void WordMost::wordMostSearch()
 
 void WordMost::letterMostSearch()
 {
-    setMaxLength(0);
+    setMaxLength(-1);
     graph.clearAllStar();
     vector<ArcNode> qlist;
     ArcNode node;
@@ -158,7 +266,7 @@ void WordMost::letterMostSearch()
 
 void WordMost::letterMostCertainHeadSearch(char a)
 {
-	setMaxLength(0);
+	setMaxLength(-1);
 	graph.clearAllStar();
 	vector<ArcNode> qlist;
 	ArcNode node;
@@ -200,7 +308,7 @@ void randDSearch(vector<Arc *> &arclist,vector<ArcNode> &qlist, Vertex &vex, Arc
 void WordMost::certainHeadSearchLargeScale(char a)
 {
 	srand(time(0));
-	setMaxLength(0);
+	setMaxLength(-1);
 	graph.clearAllStar();
 	vector<Arc *> arclist, lastarclist;
 	vector<ArcNode> qlist, lastqlist;
@@ -230,7 +338,7 @@ void WordMost::certainHeadSearchLargeScale(char a)
 		} while (curlength == 0);
 		lasttime = clock();
 
-		while (clock() - lasttime < timelimit / 4)
+		while (clock() - lasttime < timelimit / 50)
 		{
 			if (curlength > 20)
 				arcnum = curlength - rand() % 10 - 1;
@@ -276,7 +384,7 @@ void WordMost::certainHeadSearchLargeScale(char a)
 void WordMost::wordMostLargeScaleSearch()
 {
 	srand(time(0));
-	setMaxLength(0);
+	setMaxLength(-1);
 	graph.clearAllStar();
 	vector<Arc *> arclist,lastarclist;
 	vector<ArcNode> qlist,lastqlist;
@@ -306,7 +414,7 @@ void WordMost::wordMostLargeScaleSearch()
 		} while (curlength == 0);
 		lasttime = clock();
 
-		while (clock() - lasttime < timelimit/40)
+		while (clock() - lasttime < timelimit/50)
 		{
 			if (curlength > 20)
 				arcnum = curlength - rand() % 10 - 1;
@@ -352,7 +460,7 @@ void WordMost::wordMostLargeScaleSearch()
 void WordMost::letterMostLargeScaleSearch()
 {
 	srand(time(0));
-	setMaxLength(0);
+	setMaxLength(-1);
 	graph.clearAllStar();
 	vector<Arc *> arclist, lastarclist;
 	vector<ArcNode> qlist, lastqlist;
@@ -386,7 +494,7 @@ void WordMost::letterMostLargeScaleSearch()
 		} while (curlength == 0);
 		lasttime = clock();
 
-		while (clock() - lasttime < timelimit / 4)
+		while (clock() - lasttime < timelimit / 50)
 		{
 			if (qlist.size() == 1)
 				arcnum = 0;
@@ -433,7 +541,7 @@ void WordMost::letterMostLargeScaleSearch()
 void WordMost::letterMostCertainHeadSearchLargeScale(char a)
 {
 	srand(time(0));
-	setMaxLength(0);
+	setMaxLength(-1);
 	graph.clearAllStar();
 	vector<Arc *> arclist, lastarclist;
 	vector<ArcNode> qlist, lastqlist;
@@ -469,7 +577,7 @@ void WordMost::letterMostCertainHeadSearchLargeScale(char a)
 		} while (curlength == 0);
 		lasttime = clock();
 
-		while (clock() - lasttime < timelimit / 4)
+		while (clock() - lasttime < timelimit / 50)
 		{
 			if (qlist.size() == 1)
 				arcnum = 0;
@@ -548,7 +656,7 @@ void revDSearch(vector<ArcNode> &qlist, int depth, Vertex &vex, ArcNode &node, W
 
 void WordMost::certainTailSearch(char tail)
 {
-	setMaxLength(0);
+	setMaxLength(-1);
 	graph.clearAllStar();
 	vector<ArcNode> qlist;
 	ArcNode node;
@@ -590,7 +698,7 @@ void revRandDSearch(vector<Arc *> &arclist, vector<ArcNode> &qlist, Vertex &vex,
 void WordMost::certainTailSearchLargeScale(char tail)
 {
 	srand(time(0));
-	setMaxLength(0);
+	setMaxLength(-1);
 	graph.clearAllStar();
 	vector<Arc *> arclist, lastarclist;
 	vector<ArcNode> qlist, lastqlist;
@@ -623,7 +731,7 @@ void WordMost::certainTailSearchLargeScale(char tail)
 		} while (curlength == 0);
 		lasttime = clock();
 
-		while (clock() - lasttime < timelimit / 4)
+		while (clock() - lasttime < timelimit / 50)
 		{
 			if (curlength > 20)
 				arcnum = curlength - rand() % 10 - 1;
@@ -668,7 +776,7 @@ void WordMost::certainTailSearchLargeScale(char tail)
 
 void WordMost::letterMostCertainTailSearch(char tail)
 {
-	setMaxLength(0);
+	setMaxLength(-1);
 	graph.clearAllStar();
 	vector<ArcNode> qlist;
 	ArcNode node;
@@ -680,7 +788,7 @@ void WordMost::letterMostCertainTailSearch(char tail)
 void WordMost::letterMostCertainTailSearchLargeScale(char tail)
 {
 	srand(time(0));
-	setMaxLength(0);
+	setMaxLength(-1);
 	graph.clearAllStar();
 	vector<Arc *> arclist, lastarclist;
 	vector<ArcNode> qlist, lastqlist;
@@ -717,7 +825,7 @@ void WordMost::letterMostCertainTailSearchLargeScale(char tail)
 		} while (curlength == 0);
 		lasttime = clock();
 
-		while (clock() - lasttime < timelimit / 4)
+		while (clock() - lasttime < timelimit / 50)
 		{
 			if (qlist.size() > 20)
 				arcnum = qlist.size() - rand() % 10 - 1;
