@@ -64,6 +64,7 @@ int doCalc(char *ret, std::vector <std::string> &words, const char *argv[]) {	//
 		);
 		mostSearch.setTimeLimit(2000);
 		mostSearch.exec();
+		ret[0] = '\0';
 		for (int i = 0; i < mostSearch.maxQlist.size(); i++)
 		{
 			strcat(ret, mostSearch.maxQlist[i].value.c_str());
