@@ -4,6 +4,7 @@
 #include<vector>
 #include<time.h>
 #include<stdlib.h>
+#include<fstream>
 #include"WordGraph.h"
 
 class ArcNode;
@@ -18,8 +19,9 @@ public:
 class WordMost
 {
     public:
-		WordMost(WordGraph &g) :graph(g) { graph.setRevArc();  }
+		WordMost(WordGraph &g, bool charmost, char head, char tail);
         virtual ~WordMost();
+		void exec();
         void wordMostSearch();
         void letterMostSearch();
 		void setMaxLength(int len) { maxlength = len; }
@@ -46,10 +48,14 @@ class WordMost
 		}
 		WordGraph &getGraph() { return graph; }
         std::vector<ArcNode> maxQlist;
+		bool ischarmost;
+		char h;
+		char t;
 
     protected:
 
     private:
+		
 		time_t timelimit = 1000;
 		WordGraph &graph;
         int maxlength = 0;
