@@ -3,6 +3,7 @@
 #include "WordGraph.h"
 #include "readFile.h"
 #include "findAllWordList.h"
+#include "findAllCharList.h"
 #include "DebugTime.h"
 #include "WordMost.h"
 
@@ -54,10 +55,17 @@ int main(int argc, char *argv[]) {
 #ifndef NDEBUGTIME
 		cout << endl << "Detail Time For Calculate: " << endl;
 #endif
-		findAllWordList(
-			graph, 
-			inputParser.getWordNum(), 
-			inputParser.getFirstChar(), 
+		if (inputParser.maximumChar())
+			findAllCharList(
+				graph,
+				inputParser.getWordNum(),
+				inputParser.getFirstChar(),
+				inputParser.getLastChar()
+			);
+		else findAllWordList(
+			graph,
+			inputParser.getWordNum(),
+			inputParser.getFirstChar(),
 			inputParser.getLastChar()
 		);
 	} else {
