@@ -94,7 +94,7 @@ void findAllWordList(char *ret, const WordGraph &graph, int wordnum, char b, cha
 
 	DebugTime t;
 	buf = ret;
-	off = 0;
+	off = num = 0;
 	openFile();
 	depthLimit = wordnum - 1;
 	t.printTimeAndRestart("\tOpen File And Preprocessing");
